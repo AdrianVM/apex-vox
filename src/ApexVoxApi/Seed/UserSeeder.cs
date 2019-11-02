@@ -15,6 +15,31 @@ namespace ApexVoxApi.Seed
             _connectionString = connectionString;
         }
 
+        internal void SeedDeaultTenant(long tenantId, TenantContext context)
+        {
+            var tenant = new Tenant()
+            {
+                Id = tenantId,
+                Name="ApexVox"
+            };
+
+            if(!context.Tenants.Any(x=>x.Id == tenantId))
+            {
+                context.Database.OpenConnection();
+                try
+                {
+                    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Tenants ON");
+                    context.Tenants.Add(tenant);
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Tenants OFF");
+                }
+                finally
+                {
+                    context.Database.CloseConnection();
+                }
+            }
+        }
+
         internal void SeedDefaultUser(long tenantId)
         {
             var services = new ServiceCollection();
@@ -32,7 +57,7 @@ namespace ApexVoxApi.Seed
                 {
                     var context = scope.ServiceProvider.GetService<TenantContext>();
 
-                    context.Database.Migrate();
+                    SeedDeaultTenant(tenantId, context);
 
                     var user = new User()
                     {
