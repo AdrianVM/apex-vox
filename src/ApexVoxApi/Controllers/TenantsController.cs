@@ -16,14 +16,6 @@ namespace ApexVoxApi.Controllers
             _tenantService = tenantService;
         }
 
-        [HttpPost("create")]
-        public IActionResult CreateSharding()
-        {
-            _tenantService.CreateSharding();
-
-            return Ok();
-        }
-
         [HttpPost("register")]
         public IActionResult RegisterNewTenant([FromBody] string tenantName)
         {

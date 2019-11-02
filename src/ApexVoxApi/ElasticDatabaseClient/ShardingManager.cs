@@ -23,9 +23,9 @@ namespace ApexVoxApi.ElasticDatabaseClient
                 smm = ShardMapManagerFactory.CreateSqlShardMapManager(_shardingManagerOptions.ShardMapManager);
             }
 
-            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ShardMapName, out _))
+            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ListMapName, out _))
             {
-                smm.CreateListShardMap<long>(ElasticScaleConstants.ShardMapName);
+                smm.CreateListShardMap<long>(ElasticScaleConstants.ListMapName);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ApexVoxApi.ElasticDatabaseClient
             }
 
             ListShardMap<long> sm;
-            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ShardMapName, out sm))
+            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ListMapName, out sm))
             {
                 throw new InvalidOperationException("Error accessing list shard map of the sharding map manager database");
             }
@@ -73,7 +73,7 @@ namespace ApexVoxApi.ElasticDatabaseClient
             }
 
             ListShardMap<long> sm;
-            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ShardMapName, out sm))
+            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ListMapName, out sm))
             {
                 throw new InvalidOperationException("Error accessing list shard map of the sharding map manager database");
             }

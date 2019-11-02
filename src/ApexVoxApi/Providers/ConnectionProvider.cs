@@ -37,7 +37,7 @@ namespace ApexVoxApi.Providers
             }
 
             ListShardMap<long> shardMap;
-            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ShardMapName, out shardMap))
+            if (!smm.TryGetListShardMap<long>(ElasticScaleConstants.ListMapName, out shardMap))
             {
                 return null;
             }

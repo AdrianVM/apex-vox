@@ -40,31 +40,5 @@ namespace ApexVoxApi.Controllers
 
             return products;
         }
-
-        // GET: api/Products/5
-        [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(long productId)
-        {
-            var product = _unitOfWork.Products.SingleOrDefault(x => x.Id == productId);
-            if(product == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(product);
-        }
-
-        // POST: api/Products
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-            var product = new Product()
-            {
-                Name = value
-            };
-
-            _unitOfWork.Products.Add(product);
-            _unitOfWork.SaveChanges();
-        }
     }
 }

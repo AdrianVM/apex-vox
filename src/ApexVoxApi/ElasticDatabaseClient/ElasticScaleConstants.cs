@@ -2,6 +2,6 @@
 {
     public static class ElasticScaleConstants
     {
-        public const string ShardMapName = "ApexVoxSharMap";
+        public const string ListMapName = "ApexVoxList";
     }
 }
